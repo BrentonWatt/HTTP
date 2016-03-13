@@ -10,7 +10,7 @@ public class HttpServer extends Thread
             "<TITLE> HTTP MULTIPLE CHOICE <TITLE>" +
             "<BODY>";
 
-    String ending = "</BODY>" +
+    String ending = "<h1> Test </h1></BODY>" +
             "</HTML>";
 
     Socket client = null;
@@ -57,7 +57,16 @@ public class HttpServer extends Thread
             {
                 if(query.equals("/"))
                 {
-                    
+                    outTo.writeBytes("HTTP/1.1 200 OK" + "\r\n");
+                    outTo.writeBytes("Server: Java HTTPServer");
+                    outTo.writeBytes("Content-Type: text/html" + "\r\n");
+                    String test = "<h1> test </h1>";
+                    int len = test.length();
+                    outTo.writeBytes("Content-length:" + len + "\r\n");
+                    outTo.writeBytes("Connection: close\r\n");
+                    outTo.writeBytes("\r\n");
+                    outTo.writeBytes(test);
+                   // outTo.close();
                 }
             }
 
